@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import { Container, Form, Button } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Signup from "./Signup";
+// import Signup from "./Signup";
 const Login = () => {
   return (
     <>
@@ -54,12 +54,13 @@ const Login = () => {
         <p className="text-center">
           Not have an account ? Sign up here <br />
         </p>
-      </Link>
+        </Link>
+      {/* 
       <Switch>
         <Route path="/sign-up">
           <Signup />
         </Route>
-      </Switch>
+      </Switch> */}
     </>
   );
 };

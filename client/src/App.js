@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as  Router,Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as  Router,Switch, Route, Link, Routes } from "react-router-dom";
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home';
@@ -9,10 +9,8 @@ function App() {
     <>
      <Router>
      {/* <NavBar /> */}
-     
-          <Route path="/" exact element={<Home />}>
-            
-          </Route>
+     <Routes>
+          <Route path="/" exact element={<Home />}></Route>
           <Route path="/login" element={<Login />}>
             
           </Route>
@@ -22,11 +20,12 @@ function App() {
           <Route path="/products/:id" element={<SelectProduct />}>
             
           </Route> */}
-          <Route path="/sign-up" element={<Signup />}>
+          <Route path="/signup" element={<Signup />}>
             
           </Route>
           {/* <Route path="/mybasket" element={<Mybasket />}> 
           </Route> */}
+          </Routes>
      </Router>
     </>
   );

@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
-import sideimg from "../images/sideimg1.png";
+// import sideimg from "../images/sideimg1.png";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Products from "./Products";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Adduser from "./Adduser";
-import Footerpage from "./Footer"
+// import Products from "./Products";
+// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+// import Adduser from "./Adduser";
+// import Footerpage from "./Footer"
 const Home = () => {
   return (
     <>
-    home
+    <h1>Reee</h1>
       {/* <Container maxWidth="md" className="square border border-warning">
         <Box sx={{ width: "100%" }}>
           <Grid
