@@ -16,5 +16,6 @@ router.post('/signup', UserFunction.SignUp)
 
 
 router.post('/login',UserFunction.Login)
+router.get('/dashboard',authPage(["storeCreater"]),UserFunction.Dashboard)
 
 module.exports=router

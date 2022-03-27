@@ -4,41 +4,29 @@ const mongoose = require('mongoose');
 
 const AddUsers=mongoose.Schema( 
     {
-    // Name:{
-    //     type:String,
-    //     required: true
-    // },
-    // Email:{
-    //     type:String,
-    //     required: true
-    // },
-    // CNIC:{
-    //     type:Number,
-    //     required: true,
-    //     min:13,
-    //     max:13
-    // },
-    // Role:{
-    //     type:String,
-    //     required: true
-    // },
-    // password:{
-    //     type:String,
-    //     required: true,
-    //     min:6
-    // },
-    // cpassword:{
-    //     type:String,
-    //     required: true,
-    //     min:6
-    // },
-    
-    Name:String,
-    Email:String,
-    CNIC:Number,
-    Role:String,
-    Password:String,
-    cPassword:String
+    Name:{
+        type:String,
+        required: true
+    },
+    Email:{
+        type:String,
+        required: true
+    },
+    CNIC:{
+        type:Number,
+        required: true,
+        min:13,
+        max:13
+    },
+    Role:{
+        type:String,
+        required: true
+    },
+    Password:{
+        type:String,
+        required: true,
+        
+    },
 
 })
 // AddUsers.pre('save', async function save(next) {

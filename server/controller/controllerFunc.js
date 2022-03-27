@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const DbModel = require('../model/UserDb');
 const { route } = require('../routes/routers');
+const bcrypt = require('bcrypt');
+// const { JsonWebTokenError } = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 const app = express();
 
 
@@ -26,33 +29,70 @@ const SignUp= async (req,res)=>{
     //     req.session.done = false;
     //    } else {
     //     req.session.done = true;
+    const {name,cnic,email,password:plaintextpassword,cpassword,role}=req.body
+    const password=await bcrypt.hash(req.body.password,10)
+    console.log(await bcrypt.hash(req.body.password,10))
+    console.log(name,cnic,email,password,cpassword,role)
+    try{
         const userData= new DbModel({
-            Name:req.body.fname,
-            Email:req.body.email,
-            CNIC:req.body.cnic,
-            Role:req.body.role,
-            Password:req.body.password,
-            cPassword:req.body.cpassword
+            Name:name,
+            Email:email,
+            CNIC:cnic,
+            Role:role,
+            Password:password,
+           
             
         })
-        try{
-            
-            
+                
             await userData.save()
             res.send("inserted")
-            
-        }
-        catch(err){
-            console.log(err)
-        }
-  
-
+        console.log("user added",userData)
+    }
+    catch(err){
+        console.log(err)
+    }
+    
 }
 const Login=async(req,res)=>{
-    const id=req.params.id
-    await DbModel.find({_id:id})
+   
+    // const cnic=req.body.cnic;
+    try{
+        const {email, password,cnic} = req.body
+        // console.log({email, password,cnic} )
+        if(!email || !password || !cnic){
+            return res.json({status:"notok", error:"plz enter "})
+        }
+        const userLogin=await DbModel.findOne({CNIC:cnic})
+        console.log(userLogin)
+        if(userLogin){
+            const isMatch=bcrypt.compare(password,userLogin.Password)
+            if(!isMatch){
+                return res.json({status:"400",error:"invalid"})
+            }else{
+                return res.json({status:"ok"})
+            }
+        }else{
+            return res.json({error:"invalid crediential"})
+        }
+    }
+    catch(err){
+        return res.json({error:"went wrong"})
+    }
+        // const userLogin=await DbModel.findOne({CNIC:cnic},(err,result)=>{
+    //         if(err){
+    //             console.log(err)
+    //         }
+    //         else
+    //         res.send(result)
+    //     })
+    // }
+    // catch(error){
+    //     console.log(error)
+    // }
+
 }
 
 
 
-module.exports={SignUp}
+
+module.exports={SignUp,Login}

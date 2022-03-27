@@ -18,6 +18,8 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link } from 'react-router-dom';
+import axios from "axios";
+
 
 // import Signup from "./Signup";
 const Login = () => {
@@ -28,8 +30,8 @@ const Login = () => {
     showPassword: false,
   });
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChange  = (event) => {
+    setValues({ ...values, [event.target.name]: event.target.value });
   };
 
   const handleClickShowPassword = () => {
@@ -42,7 +44,24 @@ const Login = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
+const handlesubmit=(e)=>{
+  e.preventDefault();
+  // if(
+  axios.post('http://localhost:4000/login',{
+  
+    cnic: values.cnic,
+    email: values.email,
+    password: values.password,
+  
+  })
+  // .then((res)=>res.json()).status=="ok"){
+  //   alert("success")
+    
+  // }
+  // else{
+  //   alert("failed")
+  // }
+}
   return (
     <>
       <Container sx={{mt:2, display:"flex"}}>
@@ -62,6 +81,7 @@ const Login = () => {
           }}
           elevation={3}
         >
+        <form onSubmit={handlesubmit}>
       <h1 style={{color:"#4a138c"}}>Log in to your Account</h1>
           <FormControl >
       <TextField
@@ -123,6 +143,7 @@ const Login = () => {
           Not have an account ? Sign up here <br />
         </p>
         </Link>
+        </form>
           </Paper>
       </Container>
         

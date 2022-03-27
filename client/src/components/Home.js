@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
+import '../App.css';
 // import sideimg from "../images/sideimg1.png";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 // import Products from "./Products";
-// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // import Adduser from "./Adduser";
-// import Footerpage from "./Footer"
+import Footerpage from "./Footer"
+import Navbar from "./Navbar"
 const Home = () => {
   return (
     <>
-    <h1>Reee</h1>
-      {/* <Container maxWidth="md" className="square border border-warning">
+    <Navbar />
+      <Container maxWidth="md" className="square border border-warning">
         <Box sx={{ width: "100%" }}>
           <Grid
             container
@@ -38,19 +40,19 @@ const Home = () => {
                 </Button>
               </Link>
             </Grid>
-            <Grid item xs={6}>
+            {/* <Grid item xs={6}>
               <img className="img" src={sideimg} alt="" srcset="" />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Box>
-      </Container> */}
+      </Container> 
       {/* <Switch>
         <Route path="/product">
           <Products />
         </Route>
-      </Switch> */}
-      {/* <Products />
-      <Footerpage /> */}
+      </Switch> 
+      <Products />*/}
+      <Footerpage />
     </>
   );
 };
