@@ -1,60 +1,131 @@
 import React from "react";
+import Lottie from "lottie-react";
+import loginLottie from "../images/93385-login.json"
 import TextField from "@mui/material/TextField";
-import { Container, Form, Button } from "react-bootstrap";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import Container from '@mui/material/Container';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import FilledInput from '@mui/material/FilledInput';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormHelperText from '@mui/material/FormHelperText';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Link } from 'react-router-dom';
+
 // import Signup from "./Signup";
 const Login = () => {
+  const [values, setValues] = React.useState({
+    cnic:'',
+    email: '',
+    password: '',
+    showPassword: false,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <>
-      <h1 className="LoginPageHeading">Log in to your Account</h1>
-      <Container className="login">
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            {/* <Form.Label>Email address</Form.Label> */}
-            {/* <Form.Control type="email" placeholder="Enter email" /> */}
-            <TextField
-              sx={{ width: 400, maxWidth: "100%" }}
-              id="outlined-basic"
-              label="Email Address"
-              variant="outlined"
-              size="large"
-            />
-          </Form.Group>
+      <Container sx={{mt:2, display:"flex"}}>
+      <Lottie animationData={loginLottie} />
+      <Paper 
+      
+          sx={{
+          textAlign:"center",
+            boxShadow: 5,
+            p: 4,
+            margin: "auto",
+            maxWidth: 450,
+            flexGrow: 2,
+            // backgroundColor: "#4a138c",
+            backgroundColor: (theme) =>
+              theme.palette.mode === "dark" ? "red" : "#fff",
+          }}
+          elevation={3}
+        >
+      <h1 style={{color:"#4a138c"}}>Log in to your Account</h1>
+          <FormControl >
+      <TextField
+                required
+                id="outlined-basic"
+                label="CNIC"
+                type="text"
+                autoComplete="current-text"
+                variant="outlined"
+                margin="normal"
+                name="cnic"
+                value={values.cnic}
+                onChange={handleChange}
+              /><br/>
+          <TextField
+                required
+                id="outlined-basic"
+                label="Email"
+                type="email"
+                autoComplete="current-text"
+                variant="outlined"
+                margin="normal"
+                name="email"
+                value={values.email}
+                onChange={handleChange}
+              /><br/>
+          <TextField
+                required
+                id="standard-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-text"
+                variant="outlined"
+                margin="normal"
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+              />
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <TextField
-              sx={{ width: 400, maxWidth: "100%" }}
-              id="outlined-basic"
-              label="Password"
-              variant="outlined"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Remember me" />
-            <Form.Text className="text-muted">
-              We'll keep you signed in on this device. You may be asked <br />{" "}
+       <br/>
+            {/* <Form.Check type="checkbox" label="Remember me" /> */}
+            <FormHelperText>
+              We'll keep you signed in on this device. You may be asked 
               to enter your password when modifying sensitive account
               information.
-            </Form.Text>
-          </Form.Group>
+            </FormHelperText>
+          </FormControl><br/><br />
           <Button
-            style={{
-              width: 400,
-              maxWidth: "100%",
-              color: "#fffff",
-            }}
-            variant="warning"
+           
+            sx={{ backgroundColor: "#4a148c" }}
+                  variant="contained"
+           
             type="submit"
           >
             Submit
           </Button>
-        </Form>
-      </Container>
-      <Link to="/sign-up" variant="body2">
-        <p className="text-center">
+      <Link to="/signup"  variant="body2">
+        <p style={{fontSize:"0.8em"}}>
           Not have an account ? Sign up here <br />
         </p>
         </Link>
+          </Paper>
+      </Container>
+        
       {/* 
       <Switch>
         <Route path="/sign-up">
