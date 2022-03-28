@@ -82,7 +82,7 @@ const Signup = () => {
     <>
       {/* <Paper elevation={0} /> */}
 
-      <Container sx={{ my: "1rem", backgroundColor: "#eeeeee" }}>
+      <Container sx={{ my: "1rem" }}>
         <Paper
           sx={{
             display: "flex",
@@ -93,13 +93,13 @@ const Signup = () => {
             margin: "auto",
             maxWidth: 500,
             flexGrow: 1,
-            backgroundColor: "#4a138c",
+            // backgroundColor: "#4a138c",
             // backgroundColor: (theme) =>
             //   theme.palette.mode === "dark" ? "red" : "#fff",
           }}
           elevation={3}
         >
-          <form style={{ fontSize: "0.6em", color: "#fff" }}>
+          <form style={{ fontSize: "0.6em" }}>
             <h1 style={{ color: "#12005e" }}>SIGN UP</h1>
             <FormControl>
               <FormLabel id="demo-row-radio-buttons-group-label">

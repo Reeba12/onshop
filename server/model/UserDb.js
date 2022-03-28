@@ -15,8 +15,8 @@ const AddUsers=mongoose.Schema(
     CNIC:{
         type:Number,
         required: true,
-        min:13,
-        max:13
+        // min:13,
+        // max:13
     },
     Role:{
         type:String,

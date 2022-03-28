@@ -4,15 +4,20 @@ import { BrowserRouter as  Router,Switch, Route, Link, Routes } from "react-rout
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home';
+import NavBar from "./components/Navbar";
+
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
     <>
+    {/* <NavBar /> */}
      <Router>
-     {/* <NavBar /> */}
      <Routes>
           <Route path="/" exact element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/dashboard" element={<Dashboard/>}></Route>
           {/* <Route path="/product" element={<Products />}>
             
           </Route>
