@@ -1,4 +1,5 @@
 // const express = require('express');
+const jwt=require('jsonwebtoken')
 const mongoose = require('mongoose');
 // const app = express();
 
@@ -27,6 +28,14 @@ const AddUsers=mongoose.Schema(
         required: true,
         
     },
+    tokens:[
+        {
+            token:{
+                type:String,
+        required: true, 
+            }
+        }
+    ]
 
 })
 // AddUsers.pre('save', async function save(next) {
@@ -59,6 +68,16 @@ const AddUsers=mongoose.Schema(
 //         }
     
 // })
+AddUsers.methods.getAuthToken=async function(){
+    try{
+        const token= jwt.sign({id:this._id},'screte')
+        this.tokens=this.tokens.concat({token:token})
+        await this.save()
+        return token
+    }catch(err){
+        console.log(err)
+    }
+}
 const Users=mongoose.model('User',AddUsers);
 // const Products=mongoose.model('User',AddProducts);
 module.exports=Users;

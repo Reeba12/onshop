@@ -54,12 +54,21 @@ const Login = (props) => {
     e.preventDefault();
     console.log(userData, "USER DATA ==>>>");
     if (
-      axios.post("http://localhost:4000/login", {
-        cnic: values.cnic,
-        email: values.email,
-        password: values.password,
-      })
+      axios
+        .post("http://localhost:4000/login", {
+          cnic: values.cnic,
+          email: values.email,
+          password: values.password,
+        })
+        .then((res) => {
+          console.log("token response", res);
+        }).catch((er)=>{
+          console.log("er response", er);
+
+        })
     ) {
+      // const data=res.json()
+      // console.log(data)
     }
     history("/");
   };
@@ -86,7 +95,7 @@ const Login = (props) => {
             flexGrow: 2,
             display: "flex",
             // backgroundColor: "#4a138c",
-            // backgroundColor: (theme) 
+            // backgroundColor: (theme)
             //   theme.palette.mode === "dark" ? "red" : "#fff",
           }}
           elevation={3}

@@ -31,8 +31,8 @@ const SignUp = async (req, res) => {
     //     req.session.done = true;
     const { name, cnic, email, password: plaintextpassword, cpassword, role } = req.body
     const password = await bcrypt.hash(req.body.password, 10)
-    console.log(await bcrypt.hash(req.body.password, 10))
-    console.log(name, cnic, email, password, cpassword, role)
+    // console.log(await bcrypt.hash(req.body.password, 10))
+    // console.log(name, cnic, email, password, cpassword, role)
     try {
         const userData = new DbModel({
             Name: name,
@@ -60,9 +60,18 @@ const Login = async (req, res) => {
             return res.json({ status: "notok", error: "plz enter " })
         }
         const userLogin = await DbModel.findOne({ CNIC: cnic })
-        console.log(userLogin)
+        // console.log(userLogin)
         if (userLogin) {
-            const isMatch = bcrypt.compare(password, userLogin.Password)
+            const isMatch = await bcrypt.compare(password, userLogin.Password)
+                // console.log(result)
+         
+            
+            const token = await userLogin.getAuthToken()
+            // console.log(token)
+            // res.cookie("jwtoken",token,{
+            //     expires:new Date(Date.now()+25892000000),
+            //     httpOnly:true
+            // })
             if (!isMatch) {
                 return res.json({ status: "400", error: "invalid" })
             } else {
@@ -70,10 +79,18 @@ const Login = async (req, res) => {
                 // const Path=path.join(__dirname,"../")
                 // conaole.log(Path)
                 // console.log(__dirname,"../")
-                
-                return res.json({ status: "ok" })
-            }
-        } else {
+                // console.log(userLogin)
+                // return userLogin
+                res.send(token)
+            //     res.json({
+            //         _id: userLogin._id,
+            //         CNIC: userLogin.CNIC,
+            //         Name: userLogin.Name,
+            //         Role: userLogin.Role,
+            //         Email: userLogin.Email,
+                   
+            // })
+        } }else {
             return res.json({ error: "invalid crediential" })
         }
     // }
@@ -84,9 +101,10 @@ const Login = async (req, res) => {
 
 }
 
-const Dashboard=(req,res)=>{
-console.log(req.body)
-}
+// const Dashboard=(req,res)=>{
+// console.log(req.body)
+// res.send(req.rootUser)
+// }
 
 
-module.exports = { SignUp, Login,Dashboard }
+module.exports = { SignUp, Login }
