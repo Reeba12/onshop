@@ -81,7 +81,8 @@ const Login = async (req, res) => {
                 // console.log(__dirname,"../")
                 // console.log(userLogin)
                 // return userLogin
-                res.send(token)
+                // res.send(token)
+                res.send(userLogin)
             //     res.json({
             //         _id: userLogin._id,
             //         CNIC: userLogin.CNIC,

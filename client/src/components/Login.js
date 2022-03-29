@@ -19,11 +19,14 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { User } from "../redux/action/action";
 import axios from "axios";
 // import {usehistory}
 
 // import Signup from "./Signup";
 const Login = (props) => {
+  const dispatch=useDispatch()
   const [values, setValues] = React.useState({
     cnic: "",
     email: "",
@@ -62,6 +65,7 @@ const Login = (props) => {
         })
         .then((res) => {
           console.log("token response", res);
+          dispatch(User(res.data))
         }).catch((er)=>{
           console.log("er response", er);
 

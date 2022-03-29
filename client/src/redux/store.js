@@ -1,5 +1,4 @@
-import { createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore, applyMiddleware } from "redux";
 import { rootReducer } from "./reducer/rootReducer";
 // import thunk from "redux-thunk";
 // import logger from "redux-logger";
@@ -28,7 +27,8 @@ const presistedState = loadFromLocalStorage();
 export const store = createStore(
   rootReducer,
   presistedState,
-composeWithDevTools());
+  // applyMiddleware(thunk, logger)
+);
 
 store.subscribe(() => saveToLocalStorage(store.getState()));
 export default store;
