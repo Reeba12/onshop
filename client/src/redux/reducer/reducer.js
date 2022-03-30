@@ -12,7 +12,7 @@ export const reducer=(state=initialState,action)=>{
       // return {...state,user:[...state?.user]} 
       const  data  = action.payload.data;
       return {
-        ...state,
+        // ...state,
         data: {
           // id: id,
           user: data,

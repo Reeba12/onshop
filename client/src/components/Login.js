@@ -65,7 +65,7 @@ const Login = (props) => {
         })
         .then((res) => {
           console.log("token response", res);
-          dispatch(User(res.data))
+          dispatch(User(res?.data))
         }).catch((er)=>{
           console.log("er response", er);
 

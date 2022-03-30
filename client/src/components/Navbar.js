@@ -1,5 +1,7 @@
-import React from 'react';
-import { BrowserRouter as  Router,Switch, Route, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import Products from "./Products";
 import {
   Nav,
@@ -8,93 +10,196 @@ import {
   FormControl,
   Container,
   Button,
+  NavDropdown,
 } from "react-bootstrap";
 import Home from "./Home";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import Login  from "./Login";
-import Signup from './Signup';
+import Login from "./Login";
+import Signup from "./Signup";
+import "../App.css";
+import { border } from "@mui/system";
 
 const NavBar = () => {
-    return (
-        <>
-        {/* <Navbar bg="light" expand="lg">
-  <Container fluid>
-    <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
-    <Navbar.Toggle aria-controls="navbarScroll" />
-    <Navbar.Collapse id="navbarScroll">
-      <Nav
-        className="me-auto my-2 my-lg-0"
-        style={{ maxHeight: '100px' }}
-        navbarScroll
-      >
-        <Nav.Link href="#action1">Home</Nav.Link>
-        <Nav.Link href="#action2">Link</Nav.Link>
-        <NavDropdown title="Link" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-          <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item href="#action5">
-            Something else here
-          </NavDropdown.Item>
-        </NavDropdown> 
-        <Nav.Link href="#" disabled>
-          Link
-        </Nav.Link>
-      </Nav>
-      <Form className="d-flex">
-        <FormControl
-          type="search"
-          placeholder="Search"
-          className="me-2"
-          aria-label="Search"
-        />
-        <Button variant="outline-success">Search</Button>
-      </Form>
-    </Navbar.Collapse>
-  </Container>
-</Navbar> */}
-             {/* <Router> */}
-        <Navbar bg="warning" expand="lg" className="shadow-sm">
-          <Container fluid className="position-relative" >
-            <Navbar.Brand href="#" className="topnavbar">
-              OnShop
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="navbarScroll" />
-            <Navbar.Collapse id="navbarScroll">
-              <Nav
-                className="me-auto my-2 my-lg-0"
-                style={{ maxHeight: "100px" }}
-                navbarScroll
-              >
-     
-                <Nav.Link as={Link} to="/" exact>Home</Nav.Link>
-                <Nav.Link as={Link} to="/product">Shop</Nav.Link>
-              </Nav>
-      
-              {/* <Form className="d-flex me-4 position-absolute start-50">
+  const [open, setOpen] = useState(false);
+
+  const showModal = () => {
+    setOpen(true);
+  };
+  const signAuth = useSelector((state) => state.addUser);
+
+  useEffect(() => {
+    console.log(signAuth?.state?.data?.user);
+  }, [signAuth]);
+  const handleLogout = () => {
+    history("/");
+  };
+  const history = useNavigate();
+  const role = signAuth?.state?.data?.user?.Role;
+  const storeCreator = [
+    {
+      to: "./dashboard",
+      name: "Dashboard",
+    },
+    {
+      to: "./store",
+      name: "Store",
+    },
+    {
+      to: "./products",
+      name: "Products",
+    },
+  ];
+  const User = [
+    {
+      to: "./products",
+      name: "Products",
+    },
+    {
+      to: "./cart",
+      name: "Mybasket",
+    },
+    // {
+    //   to: "./appliedjobs",
+    //   name: "Applied Jobs",
+    // },
+    {
+      to: "./profile",
+      name: "Profile",
+    },
+  ];
+  return (
+    <>
+      <Navbar style={{backgroundColor:"#4a138c"}} expand="lg">
+        <Container fluid style={{margin:"0 25px"}}>
+          <Navbar.Brand href="#" className="topnavbar" style={{color:"#ffff"}}>
+            OnShop
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          
+
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: "100px" }}
+              navbarScroll
+            >
+              {role === "User"
+                ? User.map((value) => (
+                    <Nav.Link as={Link} to={value.to} style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}>
+                      {value.name}
+                    </Nav.Link>
+                  ))
+                : role === "store Creator"
+                ? storeCreator.map((value) => (
+                    <Nav.Link as={Link} to={value.to}>
+                      {value.name}
+                    </Nav.Link>
+                  ))
+                : null}
+              {role === "User" ? (
+                <div style={{display:"flex"}}>
+                  <Nav.Link
+                    // variant="white"
+                    to='/cart'
+                    // onClick={showModal}
+                    style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
+                  >
+                    <LocalGroceryStoreIcon style={{ marginRight:"10px"}} />
+                    Cart
+                  </Nav.Link>
+
+                  <Nav.Link
+                    // variant="white"
+                    // onClick={showModal}
+                    as={Link} to="/login"
+                   
+                    style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
+                  >
+                    <AccountCircleOutlinedIcon
+                style={( { marginRight: "10px" })}
+                />
+                    LogIn
+                  </Nav.Link>
+                </div>
+              ) : role === "store Creator" ? (
+                <>
+                  <Nav.Link
+                    
+                    onClick={showModal}
+                    style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
+                  >
+                    Create Store
+                  </Nav.Link>
+                  <Nav.Link
+                    style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
+                    
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Nav.Link>
+                </>
+              ) : null}
+            </Nav>
+          </Navbar.Collapse>
+          <Form className="d-flex">
                 <FormControl
                   type="search"
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
                 />
+                {/* <Button variant="white" style={{backgroungColor:"#fff",colr:"#ffff"}}>Search</Button> */}
+               <button style={{backgroungColor:"#fff",color:"#4a138c",padding:"6px", border:"1px solid #ffff",borderRadius:"2px"}}>Search</button>
+              </Form>
+        </Container>
+      </Navbar>
+      {/* <Router> */}
+      {/* <Navbar bg="warning" expand="lg" className="shadow-sm">
+        <Container fluid className="position-relative">
+          
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: "100px" }}
+              navbarScroll
+            >
+              <Nav.Link as={Link} to="/" exact>
+                Home
+              </Nav.Link>
+              <Nav.Link as={Link} to="/product">
+                Shop
+              </Nav.Link>
+            </Nav>
+
+            <Form className="d-flex me-4 position-absolute ">
+                <FormControl
+                  type="search"
+                  placeholder="Search"
+                  // className="me-2"
+                  aria-label="Search"
+                />
                 <Button variant="outline-dark">Search</Button>
-              </Form> */}
             <Nav.Link as={Link} to="/Mybasket" className="text-dark">
-            
-              <LocalGroceryStoreIcon style={{ color: "black" }} />Card(0)
+              
+              Card(0)
             </Nav.Link>
-            <Nav.Link as={Link} to="/signup" className="text-dark">Signup</Nav.Link>
+            <Nav.Link as={Link} to="/signup" className="text-dark">
+              Signup
+            </Nav.Link>
             <Nav.Link as={Link} to="/login" className="text-dark">
-              <AccountCircleOutlinedIcon style={({ color: "black" }, { marginleft: "10px" })}/>
+              <AccountCircleOutlinedIcon
+                style={({ color: "black" }, { marginleft: "10px" })}
+                />
               Sign In
             </Nav.Link>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-       
-          {/* <Route path="/" exact>
+                </Form>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar> */}
+
+      {/* <Route path="/" exact>
             <Home />
           </Route>
           <Route path="/login">
@@ -107,10 +212,10 @@ const NavBar = () => {
             <Signup />
           </Route>
       */}
-        
-        {/* </Router>  */}
-        </>
-    )
-}
 
-export default NavBar
+      {/* </Router>  */}
+    </>
+  );
+};
+
+export default NavBar;

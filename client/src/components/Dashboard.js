@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import { Card, Typography } from "@mui/material";
 import '../App.css'
 import { fontFamily } from "@mui/system";
-import Cards from "./Card";
+import Cards from "./AddToCartProduct";
 import ProductTable from "./ProductTable";
 
 

@@ -27,22 +27,22 @@ const Home = () => {
   };
   const signAuth = useSelector((state) => state.addUser);
   useEffect(() => {
-    console.log(signAuth.state.data.user.Name);
-    // setcheck(signAuth.state.data.user.Name)
-  }, []);
+    console.log(signAuth?.state?.data?.user?.Role);
+    // setcheck(signAuth.state.data.user)
+  }, [signAuth]);
 
   return (
     <>
       <NavBar />
-      <h1>{signAuth.state.data.user.Name}</h1>
-      <Container maxWidth="md" className="square border border-warning">
+      {/* <h1>{signAuth?.state?.data?.user?.Role}</h1> */}
+      <Container maxWidth="lg" >
         <Box sx={{ width: "100%" }}>
           <Grid
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
-            <Grid item xs={6} mt={5}>
+            <Grid item xs={6} mt={10}>
               <h4>New Collection</h4>
               <h1>WELCOME TO OnSHOP</h1>
 

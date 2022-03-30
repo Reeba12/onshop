@@ -38,36 +38,7 @@ const AddUsers=mongoose.Schema(
     ]
 
 })
-// AddUsers.pre('save', async function save(next) {
-//     if (!this.isModified('password')) return next();
-//     try {
-//     //   const salt = await bcrypt.hash(SALT_WORK_FACTOR);
-//     await bcrypt.hash(password, 10, function(err, hash) {
-//         // Store hash in your password DB.
-//     });
-//       this.password = await bcrypt.hash(this.password, 10);
-//       return next();
-//     } catch (err) {
-//       return next(err);
-//     }
-//   });
-  
-//   schema.methods.validatePassword = async function validatePassword(data) {
-//     return bcrypt.compare(data, this.password);
-//   };
-  
-// const AddProducts=mongoose.Schema( 
-//     {
-//         MangerName:{
 
-//         },
-//         Email:{},
-//         CNICNo:{},
-//         Products:{
-//             Name:String
-//         }
-    
-// })
 AddUsers.methods.getAuthToken=async function(){
     try{
         const token= jwt.sign({id:this._id},'screte')

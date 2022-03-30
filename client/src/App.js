@@ -8,6 +8,8 @@ import AddProduct from './components/AddProduct';
 import NavBar from "./components/Navbar";
 
 import Dashboard from './components/Dashboard';
+import Cart from './components/Cart';
+import AddToCart from './components/AddToCartProduct';
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/addproduct" element={<AddProduct />}></Route>
           <Route path="/dashboard" element={<Dashboard/>}></Route>
+          <Route path="/addproduct" element={<AddProduct/>}></Route>
+          <Route path="/addtocart" element={<AddToCart/>}></Route>
+          <Route path="/cart" element={<Cart/>}></Route>
           {/* <Route path="/product" element={<Products />}>
             
           </Route>

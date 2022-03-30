@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const DbModel = require('../model/UserDb');
+const ProductDB = require('../model/ProductDb');
 const { route } = require('../routes/routers');
 const bcrypt = require('bcrypt');
 // const { JsonWebTokenError } = require('jsonwebtoken');
@@ -8,7 +9,26 @@ const jwt = require('jsonwebtoken')
 const app = express();
 
 
+const ProductADD=async(req,res)=>{
+    const {desc,name,price,date,image}=req.body
+    try {
+        const ProductData = new ProductDB({
+            productName:name,
+            productDesc:desc,
+            productPrice:price,
+            productImg:image,
+            date:date
+        })
 
+        await ProductData.save()
+        res.send("inserted")
+        console.log("user added", ProductData)
+    }
+    catch (err) {
+        console.log(err)
+    }
+
+}
 
 
 
@@ -31,8 +51,7 @@ const SignUp = async (req, res) => {
     //     req.session.done = true;
     const { name, cnic, email, password: plaintextpassword, cpassword, role } = req.body
     const password = await bcrypt.hash(req.body.password, 10)
-    // console.log(await bcrypt.hash(req.body.password, 10))
-    // console.log(name, cnic, email, password, cpassword, role)
+    
     try {
         const userData = new DbModel({
             Name: name,
@@ -108,4 +127,4 @@ const Login = async (req, res) => {
 // }
 
 
-module.exports = { SignUp, Login }
+module.exports = { SignUp, Login,ProductADD }

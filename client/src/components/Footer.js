@@ -6,7 +6,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 
 const FooterPage = () => {
   return (
-    <div color="blue" className="font-small pt-4 mt-4 bg-warning">
+    <div color="blue" className="font-small pt-4 mt-4 " style={{color:"#ffff", backgroundColor:"#4a138c"}}>
       <Container fluid className="text-center text-md-left">
         <Row>
           <Col md="6">
