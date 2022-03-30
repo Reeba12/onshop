@@ -9,6 +9,7 @@ import NavBar from "./components/Navbar";
 
 import Dashboard from './components/Dashboard';
 import Cart from './components/Cart';
+import Products from './components/Products';
 import AddToCart from './components/AddToCartProduct';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/addproduct" element={<AddProduct/>}></Route>
           <Route path="/addtocart" element={<AddToCart/>}></Route>
           <Route path="/cart" element={<Cart/>}></Route>
+          <Route path="/products" element={<Products/>}></Route>
           {/* <Route path="/product" element={<Products />}>
             
           </Route>

@@ -21,6 +21,9 @@ const Product=mongoose.Schema(
         type:String,
         required: true
     },
+    productcategory:{
+        type:String
+    },
     date:{
         type:String
         

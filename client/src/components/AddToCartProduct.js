@@ -71,7 +71,7 @@ const AddToCart = () => {
                 {/* {Sproduct.description} */}
                 sadjsja
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio vel illum iste harum aut vero consequatur cupiditate ipsam eius, natus dignissimos officia possimus enim cum fugit cumque impedit, sit quos?
-             <br /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum voluptate cupiditate architecto qui magni quae alias consequatur, distinctio veniam praesentium expedita quia accusamus soluta culpa quos, ducimus ea sit! Neque.
+             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum voluptate cupiditate architecto qui magni quae alias consequatur, distinctio veniam praesentium expedita quia accusamus soluta culpa quos, ducimus ea sit! Neque.
               </div>
               <div className="addtocardimg d-flex ">
                   <RemoveOutlinedIcon  onClick={DeleteItems} />

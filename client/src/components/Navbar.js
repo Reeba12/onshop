@@ -84,6 +84,12 @@ const NavBar = () => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
+            <Nav.Link as={Link} to="/signup" style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}>
+                      Sign Up
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/product" style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}>
+                      Product
+                    </Nav.Link>
               {role === "User"
                 ? User.map((value) => (
                     <Nav.Link as={Link} to={value.to} style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}>

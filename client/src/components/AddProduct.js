@@ -12,9 +12,7 @@ import axios from "axios";
 
 const AddProduct = () => {
   // const [data, setData] = useState([])
-  const [img, setImg] = useState({
-    img: "",
-  });
+  const [Img, setImg] = useState("");
   const [product, setProduct] = useState({
     name: "",
     desc: "",
@@ -30,10 +28,7 @@ const AddProduct = () => {
     // setImg({ [event.target.name]: [event.target.value] });
     // setImg({...img,[event.target.name]:[ event.target.file]})
     // console.log({ [event.target.name]: [event.target.file] });
-    setImg(event.target.files)
-    console.log(img)
-
-   
+    // console.log(Img)
   };
   // const dispatch=useDispatch();
   const handleSubmit = (e) => {
@@ -47,16 +42,28 @@ const AddProduct = () => {
     // dispatch(User(Input,value))
 
     alert("Product added  Successfully");
+    console.log(product.image)
     axios.post("http://localhost:4000/addproduct", {
       name: product.name,
       date: product.date,
       desc: product.desc,
+      category: product.category,
       image: product.image,
       price: product.price,
     });
-    const formData=new FormData()
-    formData.append("files",img)
-    console.log(formData)
+    // const formData = new FormData();
+    // console.log(Img)
+    // formData.append("file", Img);
+    // formData.append("upload_preset", "fdp4mw2g");
+    // console.log(formData);
+    // axios
+    //   .post("https://res.cloudinary.com/dl2xnil88/image/upload", formData)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
     setProduct({
       name: "",
       desc: "",
@@ -88,7 +95,7 @@ const AddProduct = () => {
           <h3 style={{ color: "#4a138c", fontFamily: "Righteous" }}>
             ADD PRODUCT
           </h3>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
             <FormControl fullWidth>
               <TextField
                 required
@@ -112,6 +119,18 @@ const AddProduct = () => {
                 margin="normal"
                 value={product.desc}
                 name="desc"
+                onChange={handleChange}
+              />
+              <TextField
+                required
+                id="standard-password-input"
+                label="Product category"
+                type="text"
+                autoComplete="current-text"
+                variant="standard"
+                margin="normal"
+                value={product.Category}
+                name="category"
                 onChange={handleChange}
               />
               <TextField
@@ -169,13 +188,14 @@ const AddProduct = () => {
                 id="standard-password-input"
                 accept="image/*"
                 type="file"
-                // value={img.img}
+                // value={Img}
                 margin="normal"
-                // name="img"
-                onChange={(event)=>{
-                  setImg(event.target.files)
-                  console.log(img)
-                }}
+                name="file"
+                onChange={handleChange}
+                // onChange={(event) => {
+                //   setImg(event.target.files[0]);
+                //   console.log(event.target.files[0]);
+                // }}
               />
             </FormControl>
             <br />

@@ -18,7 +18,29 @@ const ProductTable = () => {
     //     return { name, calories, fat, carbs, protein };
     //   }
       
-
+    // const deleteData=(key)=>{
+    //   axios.delete(`http://localhost:4001/delete/${key}`)
+    //   }
+    //   const editData=(key)=>{
+    //     console.log(key)
+    //     axios.get(`http://localhost:4001/new/${key}`).then((response)=>{
+    //       console.log(response.data[0])
+    //       setUpdatedData({
+    //         key:response.data[0]._id,
+    //         clientAgency: response.data[0].clientAgency,
+    //         email: response.data[0].email,
+    //         name: response.data[0].name,
+    //         uniqueIdentifier: response.data[0].uniqueIdentifier,
+    //         govwinId: response.data[0].govwinId,
+    //         opportunityDesc: response.data[0].opportunityDesc,
+    //         anticipatedSubDate: response.data[0].anticipatedSubDate,
+    //         leadAndSupport: response.data[0].leadAndSupport,
+    //         personName:response.data[0].personName,
+    //         Inputdate:response.data[0].Inputdate
+    //       })
+    //     })
+    //     setShow(true)
+    //   }
   return (
     <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -28,7 +50,7 @@ const ProductTable = () => {
           <TableCell align="right">Product IMG</TableCell>
           <TableCell align="right">Product Description</TableCell>
           <TableCell align="right">Price</TableCell>
-          <TableCell align="right">Protein&nbsp;(g)</TableCell>
+          <TableCell align="right">Product Category</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>

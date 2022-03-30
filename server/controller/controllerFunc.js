@@ -10,13 +10,18 @@ const app = express();
 
 
 const ProductADD=async(req,res)=>{
-    const {desc,name,price,date,image}=req.body
+    const {desc,name,price,date,category}=req.body
+    console.log(req.body)
+    // const image=req.file
+    // var success=image+"uploaded";
+    res.send({title:"uploaded",success:"success"})
     try {
         const ProductData = new ProductDB({
             productName:name,
             productDesc:desc,
             productPrice:price,
-            productImg:image,
+            productImg:req.body.file,
+            productcategory:category,
             date:date
         })
 
