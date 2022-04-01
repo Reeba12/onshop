@@ -1,16 +1,17 @@
 import { ADD_USER } from "../action/actiontype";
+import { DELETE_USER } from "../action/actiontype";
 
-const initialState={
-    user:[]
-}
+const initialState = {
+  user: [],
+};
 
-export const reducer=(state=initialState,action)=>{
-    switch(action?.type){
-        case ADD_USER:
-            // const { data} = action.payload;
+export const reducer = (state = initialState, action) => {
+  switch (action?.type) {
+    case ADD_USER:
+      // const { data} = action.payload;
 
-      // return {...state,user:[...state?.user]} 
-      const  data  = action.payload.data;
+      // return {...state,user:[...state?.user]}
+      const {data} = action.payload.data;
       return {
         // ...state,
         data: {
@@ -19,19 +20,26 @@ export const reducer=(state=initialState,action)=>{
         },
         // authenticated: true,
       };
-      // {
-      //   ...state,
-      //   user: [
-      //     ...state.data,
-      //     {
-      //       data:data,
-      //       id: id,
-      //     },
-      //   ],
-      // };
-  
+    // {
+    //   ...state,
+    //   user: [
+    //     ...state.data,
+    //     {
+    //       data:data,
+    //       id: id,
+    //     },
+    //   ],
+    // };
+    case DELETE_USER:
+      const {del} = action.payload.data;
+      return {
+        state,
+        data: {
+          del: [],
+        },
+      };
+
     default:
-      return {state};
-            
-    }
-}
+      return { state };
+  }
+};

@@ -10,17 +10,16 @@ import SendSharpIcon from "@mui/icons-material/SendSharp";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const AddProduct = () => {
-  // const [data, setData] = useState([])
-  const [Img, setImg] = useState();
-  const [file, setFile] = useState(null);
-  const [product, setProduct] = useState({
+const CreateStore = () => {
+ 
+  const [store, setstore] = useState({
     name: "",
-    desc: "",
+    desc:"",
+    type: "",
     Date: "",
-    price: "",
-    image: "",
+   
   });
   useEffect(() => {
     
@@ -29,76 +28,17 @@ const AddProduct = () => {
   }, []);
   const signAuth = useSelector((state) => state.addUser);
   const cnic=signAuth.state.data.user.CNIC
-  const onFileChange = (e)=>{
-    setFile(e?.target?.files[0])
-    console.log(file,"FILE")
-  }
+  
   
   const handleChange = (event) => {
     console.log({ [event.target.name]: event.target.value });
-    setProduct({ ...product, [event.target.name]: event.target.value });
+    setstore({ ...store, [event.target.name]: event.target.value });
   };
-  const handleImgChange = (event) => {
-    setImg(event?.target?.file);
-    console.log(Img);
-    // setImg({ [event.target.name]: [event.target.value] });
-    // setImg({...img,[event.target.name]:[ event.target.file]})
-    // console.log({ [event.target.name]: [event.target.file] });
-    // console.log(Img)
-  };
-  // const dispatch=useDispatch();
-  const obj={
-    "file": file,
-    "upload_preset": "fdp4mw2g"
-  }
+  
+const navigate=useNavigate()
   const handleSubmit = (e) => {
-    // let formData=new FormData();
-    // formData.append("upload_preset", "fdp4mw2g");
-    // formData.append('file', file);
-    // var data=formData.get("file")
-    // var options = { content: formData };
-    // console.log(data,"----");
-    // e.preventDefault();
-    // const allData = { ...Input, value, id: new Date().getTime().toString() }
-    // console.log(allData)
-
-    // data.push(allData)
-
-    // setData([...data])
-    // dispatch(User(Input,value))
-
-    alert("Product added  Successfully");
-    // console.log(product.image);
-    console.log(file,"LINE 54");
-    let formData = new FormData();
-    console.log(Img)
-    formData.append("file", file);
-    formData.append("upload_preset", "fdp4mw2g");
-    console.log(formData);
-    axios
-    .post("https://api.cloudinary.com/v1_1/dl2xnil88/image/upload", formData)
-    .then((res) => {
-      console.log(res);
-      axios.post("http://localhost:4000/addproduct", {
-        name: product.name,
-        date: product.date,
-        desc: product.desc,
-        category: product.category,
-        image: res.data.url,
-        price: product.price,
-        cnic:cnic
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-    // setProduct({
-      //   name: "",
-      //   desc: "",
-      //   Date: "",
-    //   price: "",
-    //   image: "",
-    // });
+    e.preventDefault()
+    navigate('/dashboard')
   };
   return (
     <>
@@ -121,56 +61,44 @@ const AddProduct = () => {
           {/* import React from 'react'; */}
 
           <h3 style={{ color: "#4a138c", fontFamily: "Righteous" }}>
-            ADD PRODUCT
+            Create Store
           </h3>
           <form  encType="multipart/form-data">
             <FormControl fullWidth>
               <TextField
                 required
                 id="standard-password-input"
-                label="Product Name"
+                label="store Name"
                 type="text"
                 autoComplete="current-email"
                 variant="standard"
                 margin="normal"
-                value={product.name}
+                value={store.name}
                 name="name"
                 onChange={handleChange}
               />
               <TextField
                 required
                 id="standard-password-input"
-                label="Product Description"
+                label="store type"
                 type="text"
                 autoComplete="current-text"
                 variant="standard"
                 margin="normal"
-                value={product.desc}
+                value={store.type}
+                name="type"
+                onChange={handleChange}
+              />
+              <TextField
+                required
+                id="standard-password-input"
+                label="store Description"
+                type="text"
+                autoComplete="current-text"
+                variant="standard"
+                margin="normal"
+                value={store.desc}
                 name="desc"
-                onChange={handleChange}
-              />
-              <TextField
-                required
-                id="standard-password-input"
-                label="Product category"
-                type="text"
-                autoComplete="current-text"
-                variant="standard"
-                margin="normal"
-                value={product.Category}
-                name="category"
-                onChange={handleChange}
-              />
-              <TextField
-                required
-                id="standard-password-input"
-                label="Product Price"
-                type="text"
-                autoComplete="current-text"
-                variant="standard"
-                margin="normal"
-                value={product.price}
-                name="price"
                 onChange={handleChange}
               />
               
@@ -181,7 +109,7 @@ const AddProduct = () => {
                 autoComplete="current-text"
                 variant="standard"
                 margin="normal"
-                value={product.Date}
+                value={store.Date}
                 name="Date"
                 onChange={handleChange}
               />
@@ -201,12 +129,11 @@ const AddProduct = () => {
                  }}
              / > */}
   </FormControl>
-              <label htmlFor="contained-button-file">
-  <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={onFileChange} />
+            
   {/* <Button variant="contained" component="span">
     Upload
   </Button> */}
-</label>
+
             <br />
             <br />
 
@@ -216,7 +143,7 @@ const AddProduct = () => {
               onClick={handleSubmit}
               endIcon={<SendSharpIcon />}
             >
-              Add
+              Create
             </Button>
           </form>
           
@@ -226,4 +153,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default CreateStore;

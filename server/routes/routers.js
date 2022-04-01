@@ -33,11 +33,15 @@ const storage = multer.diskStorage({
 // })
 
 const upload = multer({ storage: storage }).single('file')
-
+router.delete("/delete/:id",UserFunction.Delete) 
 router.post("/signup", UserFunction.SignUp);
+router.get('/addtocart/:id',UserFunction.getProduct)
+router.get('/mybasket/:id',UserFunction.getProduct)
+router.get('/storeproduct/:id',UserFunction.select)
 
 router.post("/login", UserFunction.Login);
 router.post('/addproduct',upload,UserFunction.ProductADD)
+// router.post('/addproduct',upload,UserFunction.products)
 // router.post('/addproduct',upload,(req,res)=>{
 //   var success=req.file.fieldname+"uploaded";
 //   res.render('uploaded',{title:"uploaded",success:success})
@@ -63,9 +67,9 @@ router.post('/addproduct',upload,UserFunction.ProductADD)
 //         res.send(result)
 //     })
 // });
-router.get('/login',async (req,res)=>{
-  console.log(req.session)
-})
+// router.get('/login',async (req,res)=>{
+//   console.log(req.session)
+// })
 router.get("/products", (req,res)=>{
   // res.send("data")
   ProductDB.find({},(err,result)=>{

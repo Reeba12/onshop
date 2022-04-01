@@ -29,7 +29,11 @@ const Product=mongoose.Schema(
         
         
     },
-    
+    user:{
+        type:String
+        
+        
+    },
 
 })
 

@@ -1,5 +1,6 @@
 import { ADD_USER } from "./actiontype";
-import axios from 'axios';
+import { DELETE_USER } from "./actiontype";
+// import axios from 'axios';
 // import { ROOT_URL } from '../config';
 
 
@@ -11,6 +12,14 @@ export const User=(data)=>{
             data:data
         }
     }
+}
+export const deleteUser = (data) => {
+    return {
+      type: DELETE_USER,
+      payload: {
+        data:data
+      },
+    };
 }
 // export const users = (data) => {
 //     return {

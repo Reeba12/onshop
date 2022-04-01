@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import headphone from '../images/headphones_PNG101930.png'
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
+import { NavLink } from "react-router-dom";
 
 import axios from 'axios';
 
@@ -17,11 +18,19 @@ const AddToCart = () => {
 
 
   useEffect(() => {
+    console.log(id)
     const getProduct = async () => {
       setloading(true);
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-      setSproduct(await response.json());
-      setloading(false);
+
+       axios.get(`http://localhost:4000/addtocart/${id}`).then((response)=>{
+
+         setSproduct(response.data);
+         console.log(response.data)
+         setloading(false);
+       })
+       .catch((err)=>{
+        console.log(err)
+       })
     };
     getProduct();
   }, []);
@@ -52,26 +61,25 @@ const AddToCart = () => {
 
   }
   // ProductDetails
+
   const ShowSproduct = () => {
     return (
       <>
         <div className="Container">
           <div className="row productdetails" style={{marginTop:"50px"}}>
             <div className="col-md-5">
-              <img src={headphone} width="350px" height="350px" />
+              <img src={Sproduct.productImg} width="350px" height="350px" />
             </div>
             <div className="col-md-7 square border" >
-              <h4 >Electronics</h4>
-              <h1 >HeadPhone</h1>
+              <h4 >{Sproduct.productcategory}</h4>
+              <h1 >{Sproduct.productName}</h1>
               <hr />
               <Stack spacing={1}>
                 <Rating name="size-large" defaultValue={2} size="large" />
               </Stack>
               <div className=" mb-3 mt-3">
-                {/* {Sproduct.description} */}
-                sadjsja
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio vel illum iste harum aut vero consequatur cupiditate ipsam eius, natus dignissimos officia possimus enim cum fugit cumque impedit, sit quos?
-             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum voluptate cupiditate architecto qui magni quae alias consequatur, distinctio veniam praesentium expedita quia accusamus soluta culpa quos, ducimus ea sit! Neque.
+                {Sproduct.productDesc}
+               
               </div>
               <div className="addtocardimg d-flex ">
                   <RemoveOutlinedIcon  onClick={DeleteItems} />
@@ -79,9 +87,10 @@ const AddToCart = () => {
                   <AddOutlinedIcon onClick={AddItems}/>
               </div>
               <div className="cardbtn my-2">
+                <NavLink  to={`/mybasket/${Sproduct._id}`}>
                 <Button style={{backgroundColor:"#4a138c"}} className="me-2" onClick={PostProductData}>
                   Add to card
-                </Button>
+                </Button></NavLink >
                 <Button  style={{backgroundColor:"#4a138c"}} classname="me-2">
                   Checkout card
                 </Button>

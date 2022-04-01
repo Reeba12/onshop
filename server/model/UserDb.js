@@ -28,14 +28,44 @@ const AddUsers=mongoose.Schema(
         required: true,
         
     },
-    tokens:[
+    products:[
         {
-            token:{
+            productName:{
                 type:String,
-        required: true, 
-            }
+                required: true
+            },
+            productDesc:{
+                type:String,
+                required: true
+            },
+            productImg:{
+                data: Buffer,
+                type: String
+            },
+            productPrice:{
+                type:String,
+                required: true
+            },
+            productcategory:{
+                type:String
+            },
+            date:{
+                type:String
+                
+                
+            },
         }
     ]
+        // type:Object
+    
+    // tokens:[
+    //     {
+    //         token:{
+    //             type:String,
+    //     required: true, 
+    //         }
+    //     }
+    // ]
 
 })
 

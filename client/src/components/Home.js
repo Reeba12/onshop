@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Store from "./Store";
 // import Products from "./Products";
 import ecommerceshop from "../images/98481-e-commerce-shop-online.json";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -17,6 +18,7 @@ import NavBar from "./Navbar";
 import Dashboard from "./Dashboard";
 import Outlet from "./Outlet";
 import axios from "axios";
+import Products from "./Products";
 
 const Home = () => {
   const [check, setcheck] = useState("");
@@ -26,17 +28,19 @@ const Home = () => {
     });
   };
   const signAuth = useSelector((state) => state.addUser);
+  
   useEffect(() => {
-    console.log(signAuth?.state?.data?.user?.Role);
+    console.log(signAuth)
+    console.log(signAuth?.data?.user?.Role);
     // setcheck(signAuth.state.data.user)
   }, [signAuth]);
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       {/* <h1>{signAuth?.state?.data?.user?.Role}</h1> */}
       <Container maxWidth="lg" >
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%",paddingBottom:"4em" }}>
           <Grid
             container
             rowSpacing={1}
@@ -81,9 +85,16 @@ const Home = () => {
   </defs>
 </Wave> */}
       {/* <Dashboard /> */}
-      {signAuth.state.data.user.Role == "User" ? <Outlet /> : <Dashboard />}
+      {/* <hr /> */}
       <br />
       <br />
+      {/* {signAuth.state.data.user.Role === "StoreCreator" ?  <Das /> : <Products /> */}
+{/* //      signAuth.state.data.user.Role === "User" ?<Products /> :<Products /> */}
+       {/* } */}
+       <Products />
+      <br />
+      <br />
+      
       {/* <Switch>
         <Route path="/product">
           <Products />

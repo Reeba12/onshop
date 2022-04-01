@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { deleteUser } from "../redux/action/action";
 // import Products from "./Products";
 import {
   Nav,
@@ -29,11 +30,9 @@ const NavBar = () => {
   const signAuth = useSelector((state) => state.addUser);
 
   useEffect(() => {
-    console.log(signAuth?.state?.data?.user);
+    console.log(signAuth?.state?.data?.user?.Role);
   }, [signAuth]);
-  const handleLogout = () => {
-    history("/");
-  };
+  
   const history = useNavigate();
   const role = signAuth?.state?.data?.user?.Role;
   const storeCreator = [
@@ -57,7 +56,7 @@ const NavBar = () => {
     },
     {
       to: "./cart",
-      name: "Mybasket",
+      name: "cart",
     },
     // {
     //   to: "./appliedjobs",
@@ -68,13 +67,22 @@ const NavBar = () => {
       name: "Profile",
     },
   ];
+  const dispatch=useDispatch();
+  const navigate=useNavigate()
+  const handleLogout=()=>{
+    dispatch(deleteUser(signAuth?.state?.data?.user?._id))
+    navigate('/login')
+  }
+  // const signout = useSelector((state) => state.addUser);
   return (
     <>
       <Navbar style={{backgroundColor:"#4a138c"}} expand="lg">
         <Container fluid style={{margin:"0 25px"}}>
+          <Nav.Link as={Link} to='/'>
           <Navbar.Brand href="#" className="topnavbar" style={{color:"#ffff"}}>
             OnShop
           </Navbar.Brand>
+          </Nav.Link>
           <Navbar.Toggle aria-controls="navbarScroll" />
           
 
@@ -84,68 +92,71 @@ const NavBar = () => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-            <Nav.Link as={Link} to="/signup" style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}>
-                      Sign Up
-                    </Nav.Link>
-                    <Nav.Link as={Link} to="/product" style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}>
-                      Product
-                    </Nav.Link>
+            
               {role === "User"
                 ? User.map((value) => (
                     <Nav.Link as={Link} to={value.to} style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}>
                       {value.name}
                     </Nav.Link>
                   ))
-                : role === "store Creator"
+                : role === "StoreCreator"
                 ? storeCreator.map((value) => (
-                    <Nav.Link as={Link} to={value.to}>
+                    <Nav.Link as={Link} to={value.to} style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}>
                       {value.name}
                     </Nav.Link>
                   ))
-                : null}
-              {role === "User" ? (
-                <div style={{display:"flex"}}>
-                  <Nav.Link
-                    // variant="white"
-                    to='/cart'
-                    // onClick={showModal}
-                    style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
-                  >
-                    <LocalGroceryStoreIcon style={{ marginRight:"10px"}} />
-                    Cart
-                  </Nav.Link>
-
-                  <Nav.Link
-                    // variant="white"
-                    // onClick={showModal}
-                    as={Link} to="/login"
-                   
-                    style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
-                  >
-                    <AccountCircleOutlinedIcon
-                style={( { marginRight: "10px" })}
-                />
-                    LogIn
-                  </Nav.Link>
-                </div>
-              ) : role === "store Creator" ? (
-                <>
-                  <Nav.Link
-                    
-                    onClick={showModal}
-                    style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
-                  >
-                    Create Store
-                  </Nav.Link>
-                  <Nav.Link
+                // : role===""?
+                // <Nav.Link as={Link} to="/signup" style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}>
+                //       Sign Up
+                //     </Nav.Link>
+                //     <Nav.Link as={Link} to="/product" style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}>
+                //       Product
+                //     </Nav.Link>
+                    :null
+                }
+              
+              {
+                role=="User"?                
+                (
+                  <>
+                    <Nav.Link
                     style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
                     
                     onClick={handleLogout}
                   >
                     Logout
                   </Nav.Link>
-                </>
-              ) : null}
+                  </>
+                ):role === "StoreCreator" ? (
+                  <>
+                    <Nav.Link as={Link} to='/createstore'
+                     
+                      style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
+                    >
+                      Create Store
+                    </Nav.Link>
+                    <Nav.Link
+                    style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
+                    
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Nav.Link>
+                    </>
+                    ):
+                      <Nav.Link
+                      // variant="white"
+                      // onClick={showModal}
+                      as={Link} to="/login"
+                     
+                      style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
+                    >
+                      <AccountCircleOutlinedIcon
+                  style={( { marginRight: "10px" })}
+                  />
+                      LogIn
+                    </Nav.Link>
+              }
             </Nav>
           </Navbar.Collapse>
           <Form className="d-flex">

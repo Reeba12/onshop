@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useEffect,useState} from 'react';
+import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,68 +7,65 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useParams } from "react-router-dom";
+import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
 
 const ProductTable = () => {
-    // function createData(
-    //     name: string,
-    //     calories: number,
-    //     fat: number,
-    //     carbs: number,
-    //     protein: number,
-    //   ) {
-    //     return { name, calories, fat, carbs, protein };
-    //   }
+  const { id } = useParams();
+  const [Sproduct, setSproduct] = useState([])
+  useEffect(() => {
+    
+    axios.get(`http://localhost:4000/storeproduct/${id}`).then((response)=>{
+
+      setSproduct(response.data);
+      console.log(response.data)
       
-    // const deleteData=(key)=>{
-    //   axios.delete(`http://localhost:4001/delete/${key}`)
-    //   }
-    //   const editData=(key)=>{
-    //     console.log(key)
-    //     axios.get(`http://localhost:4001/new/${key}`).then((response)=>{
-    //       console.log(response.data[0])
-    //       setUpdatedData({
-    //         key:response.data[0]._id,
-    //         clientAgency: response.data[0].clientAgency,
-    //         email: response.data[0].email,
-    //         name: response.data[0].name,
-    //         uniqueIdentifier: response.data[0].uniqueIdentifier,
-    //         govwinId: response.data[0].govwinId,
-    //         opportunityDesc: response.data[0].opportunityDesc,
-    //         anticipatedSubDate: response.data[0].anticipatedSubDate,
-    //         leadAndSupport: response.data[0].leadAndSupport,
-    //         personName:response.data[0].personName,
-    //         Inputdate:response.data[0].Inputdate
-    //       })
-    //     })
-    //     setShow(true)
-    //   }
+    })
+    .catch((err)=>{
+     console.log(err)
+    })
+ 
+  
+  
+
+  
+  }, [])
+  const deleteData=(i)=>{
+    axios.delete(`http://localhost:4000/delete/${i}`)
+  }
   return (
     <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableHead>
         <TableRow>
+          <TableCell align="center">Product IMG</TableCell>
           <TableCell>Product Name</TableCell>
-          <TableCell align="right">Product IMG</TableCell>
-          <TableCell align="right">Product Description</TableCell>
+          <TableCell align="center">Product Description</TableCell>
           <TableCell align="right">Price</TableCell>
           <TableCell align="right">Product Category</TableCell>
+          <TableCell align="right">Action</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {/* {rows.map((row) => (
+    
           <TableRow
-            key={row.name}
+            key={Sproduct.productName}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
+            <TableCell align="center"><img src= {Sproduct.productImg} height="50px" width={"50px"} alt="" srcset="" />
+               </TableCell>
             <TableCell component="th" scope="row">
-              {row.name}
+              {Sproduct.productName}
             </TableCell>
-            <TableCell align="right">{row.calories}</TableCell>
-            <TableCell align="right">{row.fat}</TableCell>
-            <TableCell align="right">{row.carbs}</TableCell>
-            <TableCell align="right">{row.protein}</TableCell>
+            <TableCell align="right">{Sproduct.productDesc}</TableCell>
+            <TableCell align="right">{Sproduct.productPrice}</TableCell>
+            <TableCell align="right" sx={{marginTop:"1em"}}>{Sproduct.productcategory}</TableCell>
+            <TableCell>
+            <Button onClick={()=>{deleteData(Sproduct._id)}}><DeleteIcon /></Button>
+            </TableCell>
           </TableRow>
-        ))} */}
+  
       </TableBody>
     </Table>
   </TableContainer>

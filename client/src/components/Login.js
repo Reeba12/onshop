@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Lottie from "react-lottie";
 import animationData from "../images/93385-login.json";
 import TextField from "@mui/material/TextField";
@@ -25,9 +25,9 @@ import axios from "axios";
 // import {usehistory}
 
 // import Signup from "./Signup";
-const Login = (props) => {
+const Login = () => {
   const dispatch=useDispatch()
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     cnic: "",
     email: "",
     password: "",
@@ -66,6 +66,7 @@ const Login = (props) => {
         .then((res) => {
           console.log("token response", res);
           dispatch(User(res?.data))
+          history('/')
         }).catch((er)=>{
           console.log("er response", er);
 
