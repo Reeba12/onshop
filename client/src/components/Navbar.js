@@ -144,18 +144,30 @@ const NavBar = () => {
                   </Nav.Link>
                     </>
                     ):
-                      <Nav.Link
+                      (
+                        <>
+                        <Nav.Link
                       // variant="white"
                       // onClick={showModal}
-                      as={Link} to="/login"
+                      as={Link} to="/signup"
                      
                       style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
                     >
                       <AccountCircleOutlinedIcon
                   style={( { marginRight: "10px" })}
                   />
+                      signup
+                    </Nav.Link>
+                        <Nav.Link
+                      as={Link} to="/login" style={{ color:"#ffff",textDecoration:"none", margin:"0 12px "}}
+                    >
+                      <AccountCircleOutlinedIcon
+                  style={( { marginRight: "10px" })}
+                  />
                       LogIn
                     </Nav.Link>
+                    </>
+                    )
               }
             </Nav>
           </Navbar.Collapse>
