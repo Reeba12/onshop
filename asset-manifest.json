@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/store/static/css/main.7b6cf63e.css",
-    "main.js": "/store/static/js/main.4be28bc3.js",
-    "static/media/headphones_PNG101930.png": "/store/static/media/headphones_PNG101930.be7a38862337c2281cce.png",
-    "static/media/glyphicons-halflings-regular.svg": "/store/static/media/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg",
-    "static/media/glyphicons-halflings-regular.ttf": "/store/static/media/glyphicons-halflings-regular.4692b9ec53fd5972caa2.ttf",
-    "static/media/glyphicons-halflings-regular.woff": "/store/static/media/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff",
-    "static/media/glyphicons-halflings-regular.eot": "/store/static/media/glyphicons-halflings-regular.5be1347c682810f199c7.eot",
-    "static/media/glyphicons-halflings-regular.woff2": "/store/static/media/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2",
-    "index.html": "/store/index.html",
-    "main.7b6cf63e.css.map": "/store/static/css/main.7b6cf63e.css.map",
-    "main.4be28bc3.js.map": "/store/static/js/main.4be28bc3.js.map"
+    "main.css": "/onshop/static/css/main.4a187709.css",
+    "main.js": "/onshop/static/js/main.f8af76af.js",
+    "static/media/headphones_PNG101930.png": "/onshop/static/media/headphones_PNG101930.be7a38862337c2281cce.png",
+    "static/media/glyphicons-halflings-regular.svg": "/onshop/static/media/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg",
+    "static/media/glyphicons-halflings-regular.ttf": "/onshop/static/media/glyphicons-halflings-regular.4692b9ec53fd5972caa2.ttf",
+    "static/media/glyphicons-halflings-regular.woff": "/onshop/static/media/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff",
+    "static/media/glyphicons-halflings-regular.eot": "/onshop/static/media/glyphicons-halflings-regular.5be1347c682810f199c7.eot",
+    "static/media/glyphicons-halflings-regular.woff2": "/onshop/static/media/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2",
+    "index.html": "/onshop/index.html",
+    "main.4a187709.css.map": "/onshop/static/css/main.4a187709.css.map",
+    "main.f8af76af.js.map": "/onshop/static/js/main.f8af76af.js.map"
   },
   "entrypoints": [
-    "static/css/main.7b6cf63e.css",
-    "static/js/main.4be28bc3.js"
+    "static/css/main.4a187709.css",
+    "static/js/main.f8af76af.js"
   ]
 }
