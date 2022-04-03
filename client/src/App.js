@@ -29,7 +29,7 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route  exact path="/" element={<Home />}></Route>
+          <Route exact path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/addproduct" element={<AddProduct />}></Route>
@@ -40,7 +40,7 @@ function App() {
           <Route path="/products" element={<Products />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/mybasket/:id" element={<Mybasket />}></Route>
-          <Route path="/store" element={<Store />}></Route>
+          {/* <Route path="/" element={<Store />}></Route> */}
           <Route path="/createstore" element={<CreateStore />}></Route>
           {/* <Route path="/product" element={<Products />}>
             
